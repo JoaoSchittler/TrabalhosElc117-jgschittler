@@ -1,0 +1,67 @@
+Exercícios aula prática 1
+-- Exercício 1
+sumSquares :: Int -> Int -> Int
+sumSquares x y = square x + square y
+
+-- Exercício 2
+hasEqHeads :: [Int] -> [Int] -> Bool
+hasEqHeads l1 l2 = if head l1 == head l2 then True else False
+
+
+-- Exercício 3
+makeSuper  :: [Char] -> [Char]
+makeSuper  s = "Super " ++  s 
+--map makeSuper ["Pedro","Maria"]
+
+
+-- Exercício 4
+tamanhoStr :: [Char] -> Int
+tamanhoStr s = length s
+
+filtrodeEspaco :: Char -> Bool
+filtrodeEspaco c = c == ' '
+--tamanhoStr(filter filtrodeEspaco "HA HA HA")
+
+
+-- Exercício 5
+--map (\n -> 3*(n^2) + (2/n) + 1) [4,5,7]
+
+-- Exercício 6
+filtroNegativo :: Int -> Bool
+filtroNegativo x = if x < 0 then True else False
+--filter filtroNegativo [1,-1,8,-7]
+
+
+-- Exercício 7
+
+--filter (\n -> n>=1 && n<= 100) [-1,200,50,74,6]
+
+-- Exercício 8
+
+-- filter (\i -> (2019-i) < 1980) [15,45,30,18,60]
+
+-- Exercício 9
+
+-- filter (\x -> if mod x 2 == 0 then True else False) [1,2,3,4,5,6,7,8,9,10]
+
+-- Exercício 10
+
+filtrochar :: Char -> Char -> Bool
+filtrochar c f = c == f 
+
+charFound :: Char -> String -> Bool
+charFound f s = if length(filter (filtrochar f) s) > 0 then True else False 
+
+-- Exercício 11
+filtraA  :: [Char] -> Bool
+filtraA str = if last str == 'a' then True else False 
+-- filter filtraA ["HA Ha","HE HE","HI HI"]
+
+-- Exercício 12
+
+Verificar se todos os elementos de uma lista são menores que um valor usando takeWhile
+
+f :: [Int] -> Int -> Bool
+f lista valor = if length(takeWhile (<valor)lista ) /= length Lista then False else True
+
+
