@@ -1,96 +1,56 @@
 :q
-;q
-;Q
-map toLower (tail(words "sadassda sada" ))
-tail(words "sadassda sada" )
-map toLower (tail(words "sadassda sada" ))
-tail(words "sadassda sada" )
-map toLower (tail(words "sadassda sada" ))
-map toLower tail(words "sadassda sada" )
-map converte tail(words "sadassda sada" )
-tail(words "sadassda sada" )
-words "sadassda sada"
-map converte tail(words "sadassda sada" )
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
+betterEncodename "Joaum Gabrieu"
 :q
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-import Data.Char
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-import Data.char
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-first ["abc","def"]
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-lastname "Joao Gabriel da Cunha Schittler"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:q
-isInt "a2019a"
-isInt "2018"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-notalgarismo '2'
-isInt "2018"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-firstname  "joao gabriel da cunha"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-codifica "abc def ghi"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-codifica' "abc def ghi" 
-codifica' "abc" 
-codifica "ABC DEF GHI"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-codifica "Rio"
-codifica "Rio"
-codifica "Rio grande do sul"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-tiravirgulas' "aeioufgh"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-tiravirgulas' "abcdefghiuo"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-tiravirgulas "abcdefghi"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-tiravirgulas "abcdefghi"
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-htmlListItems' ["lmnopq","rstuv"]
-htmlListItems' ["lmnopq","rstuv"]
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-htmlListItems ["abcdef","ghijk"]
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-addComma ["hahaha","adhaydh"]
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-isVowel 'U'
-isVowel 'b'
-isVowel 'a'
-isVowel a
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
-:l TrabalhosElc117-jgschittler/t1/t1.hs 
+oi prof, consegui fazer uma solucao que involve recursao :)
+period10 ["abcd","adcerfeffe"]
 :load t1.hs
-'b' - 'a'
+period10 ["abcd","adcerfeffe"]
+:load t1.hs
+:load t1.hs
+period10 ["abcd","adcerfeffe"]
+:load t1.hs
+period10 ["abcd","adcerfeffe"]
+:load t1.hs
+:t take
+:t head
+:load t1.hs
+:load t1.hs
+:load t1.hs
 :q
+:load t1.hs
+span (/= 'u') "Joaum grabrieu"
+span (/= 'u' || /= 'U') "Joaum grabrieu"
+:q
+words (encodeU (encodeName "Joaum gabrieu"))
+encodeU (encodeName "Joaum gabrieu")
+encodeName "Joaum gabrieu"
+:load t1.hs
+encodeName "joaum gabrieu"
+encodeU (encodename "joaum gabrieu")
+:t add00
+:t unwords
+:load t1.hs
+:q
+;q
+:load t1.hs
+:load t1.hs
+['a'] ++ "00"
+['a'] ++ "00"
+'a' ++ "00"
+encodeName "Joao Anderson Oliveira"
+:load t1.hs
+encodeName "Joao Anderson Oliveira"
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+userName "Joao Gabriel Schittler"
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
+:load t1.hs
