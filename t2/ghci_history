@@ -1,0 +1,177 @@
+take 42 [(r*(80+incr),g*(80+incr),b*(80+incr)) | r <- [1,0,0], g <- [0,1,0],b <- [0,0,1] ,incr <- [0,10..130]]
+take 9 [(r*(80+incr),g*(80+incr),b*(80+incr)) | r <- [1,0,0], g <- [0,1,0],b <- [0,0,1] ,incr <- [0,10..]]
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+genCase3
+:l t2.hs 
+genCase3
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+genCase3
+:l t2.hs 
+genCase3
+:l t2.hs 
+genCase3
+[((160 + x*160 , 160 + y*160),50)| y <- [0,1], x <-[0..2]]
+genCase3
+genCase2
+genCase1
+main 
+genPattern1
+genPattern2
+[((160 + x*160 , 160 + y*160),50)| y <- [0,1], x <-[0..2]]
+[((160 + x*160 , 160 + y*160),50)| x <- [0..2], y <-[0,-1]]
+genCase2
+:l t2.hs 
+genCase2
+:l t2.hs 
+genCase2
+:l t2.hs 
+genCase2
+:l t2.hs 
+:l t2.hs 
+genCase2
+genCase2
+genCase2
+:l t2.hs 
+genCase2
+:l t2.hs 
+length [((sin x, cos x),10) | x <- [0,0.523..5.759]]
+length [((sin x, cos x),10) | x <- [0,0.523..6.28]]
+[((sin x, cos x),10) | x <- [0,0.523..6.28]]
+length [((sin x, cos y),10) | x <- [0,0.523..6.28], y <- [0,0.523..6.28]]
+length [((sin x, cos y),r) | x <- [0,0.523..6.28], y <- [0,0.523..6.28]]
+[((sin x, cos y),10) | x <- [0,0.523..6.28], y <- [0,0.523..6.28]]
+genCase2
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+:l t2.hs 
+genCase1 
+:l t2.hs 
+:q
+:Q
+:q
+genCase1
+:l t2.hs
+genCase1
+genCase1
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+[((x*(60),y*(60)),50,50) | x <- [0..9], y <- [0..3]]
+[((x*(60),y*(60)),50,50) | x <- [0..fromIntegral(n-1)], y <- [0..3]]
+[((x*(60),y*(60)),w,h) | x <- [0..fromIntegral(n-1)], y <- [0..3]]
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+:l t2.hs
+genPattern1alt
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+genCase1 
+:l t2.hs
+genCase1 
+genCase1 
+:l t2.hs
+genCase1 
+genCase1 
+:l t2.hs
+genCase1 
+:l t2.hs
+:q
+genCase1
+:l t2.hs
+genCase1
+genCase1
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+[((x*(60),y*(60)),50,50) | x <- [0..9], y <- [0..3]]
+[((x*(60),y*(60)),50,50) | x <- [0..fromIntegral(n-1)], y <- [0..3]]
+[((x*(60),y*(60)),w,h) | x <- [0..fromIntegral(n-1)], y <- [0..3]]
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+genCase1
+:l t2.hs
+:l t2.hs
+genPattern1alt
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+genCase1 
+:l t2.hs
+genCase1 
+genCase1 
+:l t2.hs
+genCase1 
+genCase1 
+:l t2.hs
+genCase1 
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+:l t2.hs
+main
+:l t2.hs
+:t main
+main
+:l t2.hs
+:D
