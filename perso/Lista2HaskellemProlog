@@ -1,0 +1,63 @@
+%Lista 2 Haskell em Prolog
+
+%Exercício 1
+%Crie uma função isVowel :: Char -> Bool que verifique se um caracter é uma vogal ou não.
+isVowel(a).
+isVowel(b).
+isVowel(c).
+isVowel(d).
+isVowel(e).
+%Exercício 2
+addComma([H|T],[H2|T2]):- append(H,",",H2),addComma(T,T2).
+%Exercício 3
+htmlListItems([H1|T1],[H2|T2]):- append(H1,"</LI>",H3),append("<LI>",H3,H2),htmlListItems(T1,T2).
+%Exercício 4
+semVogais([],[]).
+semVogais([H1|T1],[H2|T2]):- not(isVowel(H1)),H2 is H1,semVogais(T1,T2).
+semVogais([H1|T1],L2):- isVowel(H1),semVogais(T1,L2).
+%Exercício 5
+codifica([],[]).
+codifica([H1|T1],[H2|T2]):- not(isSpace(H1)),H2 is '-',codifica(T1,T2).
+codifica([H1|T1],[H2,T2]):- isSpace(H1),H2 is ' ',codifica(T1,T2).
+%Exercício 6
+firstName([],[]).
+firstName(Name,Firstname):- Name = [H1|T1],Firstname = [H2|T2],H2 is H1,firstName(T1,T2).
+firstName([' '|_],[]).
+%Exercício 7  
+isInt([H1|T1]):- isDigit(H1),isInt(T1).
+%Exercício 8
+Escreva uma função lastName :: String -> String que, dado o nome completo de uma pessoa, obtenha seu último sobrenome. Suponha que cada parte do nome seja separada por um espaço e que não existam espaços no início ou fim do nome. Exemplos de uso da função:
+> lastName "Anderson Silva"
+"Silva"
+> lastName "JON BON JOVI"
+"JOVI"
+%Exercício 9
+Escreva uma função userName :: String -> String que, dado o nome completo de uma pessoa, crie um nome de usuário (login) da pessoa, formado por: primeira letra do nome seguida do sobrenome, tudo em minúsculas. Dica: estude as funções pré-definidas no módulo Data.Char, para manipulação de maiúsculas e minúsculas. Você precisará carregar este módulo usando import Data.Char no interpretador ou no início do arquivo do programa.
+
+Exemplos de uso da função:
+
+> userName "Anderson Silva"
+"asilva"
+> userName "JON BON JOVI"
+"jjovi"
+%Exercício 10
+Escreva uma função encodeName :: String -> String que substitua vogais em uma string, conforme o esquema a seguir: a = 4, e = 3, i = 2, o = 1, u = 0.
+
+Exemplos de uso da função:
+
+> encodeName "Anderson Silva"
+"4nd3rs1n s2lv4"
+> encodeName "Badtz Maru"
+"B4dtz M4r0"
+%Exercício 11
+Escreva uma função betterEncodeName :: String -> String que substitua vogais em uma string, conforme este esquema: a = 4, e = 3, i = 1, o = 0, u = 00. Exemplos de uso da função:
+
+> betterEncodeName "Anderson Silva"
+"4nd3rs0n s1lv4"
+> betterEncodeName "Badtz Maru"
+"B4dtz M4r00"
+Dada uma lista de strings, produzir outra lista com strings de 10 caracteres, usando o seguinte esquema: strings de entrada com mais de 10 caracteres são truncadas, strings com até 10 caracteres são completadas com '.' até ficarem com 10 caracteres. Exemplo:
+
+> func ["palavras","paralelas","pedal","paralelepipedo"]
+["palavras..","paralelas.","pedal.....","paralelepi"]
+
