@@ -30,11 +30,6 @@ isInt(Str):- string_chars(Str,L),isInt2(L).
 last([X],X).
 last([_|T],X):- last(T,X),!.
 lastName(Name,Lastname):- split_string(Name, " ", "", L),last(L,Lastname).
-%Exercício 9
-%> userName "Anderson Silva"
-%"asilva"
-%> userName "JON BON JOVI"
-%"jjovi"
 %Exercício 10
 encode('a','4').
 encode('A','4').
