@@ -34,7 +34,7 @@ public class BlockViewer extends Application {
     }
     private void buttonclick(int way){
         updatePosition(way);
-        imagetoshow = new ImageView(blocks.get(position));
+        imagetoshow.setImage(blocks.get(position));
     }
     private void updatePosition(int way){
         if(way == 1){
@@ -55,6 +55,7 @@ public class BlockViewer extends Application {
     }
     @Override
     public void start(Stage stage){
+        this.setBlocks();
         position = 0;
         Button btl = new Button("<");
         btl.setOnAction(event-> this.buttonclick(-1));     
