@@ -24,6 +24,7 @@ public class Manager {
 					}
 
 			}
+			System.out.println(l);
 			return l;
 		}
 		public static ArrayList<String> FiletoList(File file) throws IOException {
@@ -39,13 +40,14 @@ public class Manager {
 				return list;
 		}
 		public static String ListtoString(ArrayList<String> list) {
-			String str = "";
+			StringBuffer str = new StringBuffer();
+			
 			for(String element: list) {
-				str = str + element;
+				str.append(element + "\n");
 				
 			}
-			System.out.println(str);
-			return str;
+			System.out.println(str.toString());
+			return str.toString();
 		}
 		public static ArrayList<String> StringtoList(String s) {
 			ArrayList<String> list = new ArrayList<String>();
@@ -55,8 +57,8 @@ public class Manager {
 				aux.append(c[i]);
 				if(c[i]=='\n') {
 					list.add(aux.toString());
+					System.out.print("Aux:"+aux);
 					aux.delete(0,i-1);
-					System.out.println("Aux: "+aux);
 				}
 			}
 			return list;
