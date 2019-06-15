@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Manager {
-		private static ArrayList<String> list;
+		
 		private static ArrayList<String> read_file(FileReader reader) throws IOException
 		{
 			ArrayList<String> l =  new ArrayList<String>();
@@ -27,17 +27,16 @@ public class Manager {
 			return l;
 		}
 		public static ArrayList<String> FiletoList(File file) throws IOException {
-				list = new ArrayList<String>(); 
 			    file.createNewFile();
 			    FileReader reader = new FileReader(file);
-			    read_file(reader);
+			    ArrayList<String> list = read_file(reader);
 			    reader.close();
 				return list;
 		}
 		public static ArrayList<String> FiletoList(FileReader filereader) throws IOException {
-			ArrayList<String> list = new ArrayList<String>();
-			read_file(filereader);
-			return list;
+				ArrayList<String> list = new ArrayList<String>();
+				read_file(filereader);
+				return list;
 		}
 		public static String ListtoString(ArrayList<String> list) {
 			String str = "";

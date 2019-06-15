@@ -8,5 +8,7 @@ public interface View {
 	public void fillTextArea(String s);
 	public void setShuffledList(ArrayList<String> l);
 	public void disableNextButton();
+	public void enableNextButton();
+	public void enableShuffle();
 	
 }

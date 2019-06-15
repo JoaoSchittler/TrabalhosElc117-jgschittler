@@ -48,6 +48,7 @@ public class RandomPickerGUI extends Application implements View{
 		fileChooser.setTitle("Select txt file");
 		bshuffle.setOnAction(e -> {controller.shuffle(txtarea.getText());});
 		bnext.setOnAction(e -> { controller.putelelement(shuffledlist); });
+		
 		itemExit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		        System.out.println("Saiu do programa");
@@ -55,6 +56,7 @@ public class RandomPickerGUI extends Application implements View{
 		        stage.close();
 		    }
 		});
+		txtarea.setOnKeyTyped(e -> {controller.checkifcanshuffle(txtarea.getText());});
 		itemAbout.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		    	//Temporário
@@ -62,6 +64,7 @@ public class RandomPickerGUI extends Application implements View{
 		        fillTextArea("RandomPickerGUI, feito por João Gabriel Schittler");
 		    }
 		});
+		
 		bshuffle.setDisable(true);
 		bnext.setDisable(true);
 		
@@ -100,7 +103,8 @@ public class RandomPickerGUI extends Application implements View{
 		txtarea.clear();
 		txtarea.appendText(s);
 		bshuffle.setDisable(false);
-		if(s.contains("\n")) {
+		if(s.contains(System.getProperty("line.separator"))) {
+			System.out.println("Contains barra n");
 			bnext.setDisable(false);
 		}
 	}
@@ -111,6 +115,14 @@ public class RandomPickerGUI extends Application implements View{
 	@Override
 	public void disableNextButton() {
 		bnext.setDisable(true);
+	}
+	@Override
+	public void enableNextButton() {
+		bnext.setDisable(false);
+	}
+	@Override
+	public void enableShuffle() {
+		bshuffle.setDisable(false);
 		
 	}
 	
