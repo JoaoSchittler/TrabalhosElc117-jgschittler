@@ -1,6 +1,7 @@
 package t5;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -35,17 +36,18 @@ public class RandomPickerGUI extends Application implements View{
 			private MenuItem itemAbout = new MenuItem("About");
 
 	private TextArea txtarea = new TextArea();
-	private Button bshuffle = new Button();
-	private Button bnext = new Button();
-
+	private Button bshuffle = new Button("Shuffle");
+	private Button bnext = new Button("Next");
+	
+	private ArrayList<String> shuffledlist = null;
+	
 	public void start(final Stage stage) {
 		this.stage = stage;
 		controller = new AppController(this);
 		itemOpen.setOnAction(e -> {controller.showFileChosser();});
 		fileChooser.setTitle("Select txt file");
-		//txtarea.appendText();
 		bshuffle.setOnAction(e -> {controller.shuffle(txtarea.getText());});
-		//bnext.setOnAction();
+		bnext.setOnAction(e -> { controller.putelelement(shuffledlist); });
 		itemExit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		        System.out.println("Saiu do programa");
@@ -61,7 +63,7 @@ public class RandomPickerGUI extends Application implements View{
 		    }
 		});
 		bshuffle.setDisable(true);
-		
+		bnext.setDisable(true);
 		
 		menuFile.getItems().addAll(itemOpen,itemExit);
 		menuHelp.getItems().add(itemAbout);
@@ -89,13 +91,27 @@ public class RandomPickerGUI extends Application implements View{
 	@Override
 	public void enableFileChooser() {
 		File file = fileChooser.showOpenDialog(stage);
-		controller.showFile(file);
+		if(file != null)
+			controller.showFile(file);
 
 	}
 	@Override
 	public void fillTextArea(String s) {
 		txtarea.clear();
 		txtarea.appendText(s);
+		bshuffle.setDisable(false);
+		if(s.contains("\n")) {
+			bnext.setDisable(false);
+		}
+	}
+	@Override
+	public void setShuffledList(ArrayList<String> l) {
+		shuffledlist = l;
+	}
+	@Override
+	public void disableNextButton() {
+		bnext.setDisable(true);
+		
 	}
 	
 }

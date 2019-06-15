@@ -7,19 +7,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class ListShuffler {
 	private static boolean online_success = false;
-	public static void offlineshuffle(ArrayList<String> l) {
+	public static ArrayList<String> offlineshuffle(ArrayList<String> l) {
 		Collections.shuffle(l);
-		try {System.in.read();}catch (IOException e1) {}
-		//Prints One element and Waits for a console input
-		for(String element: l) {
-			System.out.print(element);
-			try {System.in.read();} catch (IOException e) {}
-		}
-		
+		System.out.println(l);
+		return l;
 	}
-	public static void onlineshuffle(ArrayList<String>l) {
+	public static ArrayList<String> onlineshuffle(ArrayList<String>l) {
 		try {
-        	  System.in.read();
         	  
 		      String urlstr = "https://www.random.org/lists/?mode=advanced";
 		      URL url = new URL(urlstr);
@@ -48,7 +42,6 @@ public class ListShuffler {
 		      while ((responseLine = in.readLine()) != null) {
 		    	  	response.append(responseLine + "\n");
 		        	System.out.print(responseLine);
-		        	System.in.read();
 		        	online_success = true;
 		      }
 		      // Mostra resposta
@@ -57,7 +50,8 @@ public class ListShuffler {
 		      in.close();
 		    } catch (IOException e) {e.printStackTrace();}
 		if(online_success == false)
-			offlineshuffle(l);
+			return offlineshuffle(l);
+		return l;
 	}
 		
 }
