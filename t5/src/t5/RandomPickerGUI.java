@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.MenuBar;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -38,6 +39,8 @@ public class RandomPickerGUI extends Application implements View{
 	private TextArea txtarea = new TextArea();
 	private Button bshuffle = new Button("Shuffle");
 	private Button bnext = new Button("Next");
+	private Button bclear = new Button("Clear");
+	private Label  txtlb = new Label();
 	
 	private ArrayList<String> shuffledlist = null;
 	
@@ -48,7 +51,7 @@ public class RandomPickerGUI extends Application implements View{
 		fileChooser.setTitle("Select txt file");
 		bshuffle.setOnAction(e -> {controller.shuffle(txtarea.getText());});
 		bnext.setOnAction(e -> { controller.putelelement(shuffledlist); });
-		
+		bclear.setOnAction(e-> {txtarea.clear();});
 		itemExit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		        System.out.println("Saiu do programa");
@@ -56,12 +59,15 @@ public class RandomPickerGUI extends Application implements View{
 		        stage.close();
 		    }
 		});
-		txtarea.setOnKeyTyped(e -> {controller.checkifcanshuffle(txtarea.getText());});
+		txtarea.setOnKeyTyped(e -> {controller.checkifcanshuffle(txtarea.getText());
+										this.enableClearButton();
+									});
 		itemAbout.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
-		    	//Temporário
-		        System.out.println("RandomPickerGUI, feito por João Gabriel Schittler");	        
-		        fillTextArea("RandomPickerGUI, feito por João Gabriel Schittler");
+		        if(txtlb.isDisable())      
+		        	fillLabel("RandomPickerGUI, feito por João Gabriel Schittler");
+		        else
+		        	disableLabel();
 		    }
 		});
 		
@@ -79,8 +85,8 @@ public class RandomPickerGUI extends Application implements View{
 		hb.setSpacing(30);
 		hb.setAlignment(Pos.BOTTOM_CENTER);
 		
-		hb.getChildren().addAll(bshuffle,bnext);
-		vb.getChildren().addAll(menus,txtarea,hb);
+		hb.getChildren().addAll(bshuffle,bnext,bclear);
+		vb.getChildren().addAll(menus,txtarea,hb,txtlb);
 		
 	    Scene scene = new Scene(vb, 400, 300);
 	    stage.setScene(scene);
@@ -103,10 +109,6 @@ public class RandomPickerGUI extends Application implements View{
 		txtarea.clear();
 		txtarea.appendText(s);
 		bshuffle.setDisable(false);
-		if(s.contains(System.getProperty("line.separator"))) {
-			System.out.println("Contains barra n");
-			bnext.setDisable(false);
-		}
 	}
 	@Override
 	public void setShuffledList(ArrayList<String> l) {
@@ -121,9 +123,24 @@ public class RandomPickerGUI extends Application implements View{
 		bnext.setDisable(false);
 	}
 	@Override
-	public void enableShuffle() {
+	public void enableShuffleButton() {
 		bshuffle.setDisable(false);
-		
 	}
-	
+	@Override
+	public void enableClearButton() {
+		bclear.setDisable(false);
+	}
+	@Override
+	public void fillLabel(String s) {
+		txtlb.setText(s);
+		txtlb.setDisable(false);
+		if(s.contains(System.getProperty("line.separator"))) {
+			//System.out.println("Contains barra n");
+			bnext.setDisable(false);
+		}
+	}
+	@Override
+	public void disableLabel() {
+		txtlb.setDisable(true);	
+	}
 }

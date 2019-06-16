@@ -31,8 +31,9 @@ public class AppController {
 	//Shows first element of shuffled list on textarea, removes that element from the list
 	public void putelelement(ArrayList<String> l){
 		if(l.size() > 0) {
-			this.view.fillTextArea(l.get(0));
+			this.view.fillLabel(l.get(0));
 			l.remove(0);
+			//If the list had only one element, it disables the "Next" button
 			if(l.size()==0)
 				this.view.disableNextButton();
 		}
@@ -41,8 +42,7 @@ public class AppController {
 	public void checkifcanshuffle(String text) {
 		String newline= System.getProperty("line.separator");
 		// text.contains("\n") procura por literalmente \n na string ao invés de procurar quebra de linha
-		if(text.contains(newline)) this.view.enableShuffle();
+		if(text.contains(newline)) this.view.enableShuffleButton();
 	}
-
 	
 }
