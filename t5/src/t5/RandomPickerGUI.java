@@ -51,7 +51,7 @@ public class RandomPickerGUI extends Application implements View{
 		fileChooser.setTitle("Select txt file");
 		bshuffle.setOnAction(e -> {controller.shuffle(txtarea.getText());});
 		bnext.setOnAction(e -> { controller.putelelement(shuffledlist); });
-		bclear.setOnAction(e-> {txtarea.clear();});
+		bclear.setOnAction(e-> {txtarea.clear();disableLabel();});
 		itemExit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		        System.out.println("Saiu do programa");
@@ -79,7 +79,7 @@ public class RandomPickerGUI extends Application implements View{
 		menus.getMenus().addAll(menuFile,menuHelp);
 		VBox vb = new VBox();
 		vb.setSpacing(10);
-		vb.setAlignment(Pos.TOP_LEFT);
+		vb.setAlignment(Pos.CENTER);
 		
 		HBox hb = new HBox();
 		hb.setSpacing(30);

@@ -40,9 +40,7 @@ public class AppController {
 		
 	}
 	public void checkifcanshuffle(String text) {
-		String newline= System.getProperty("line.separator");
-		// text.contains("\n") procura por literalmente \n na string ao invés de procurar quebra de linha
-		if(text.contains(newline)) this.view.enableShuffleButton();
+		if(text.length() > 0) this.view.enableShuffleButton();
 	}
 	
 }
