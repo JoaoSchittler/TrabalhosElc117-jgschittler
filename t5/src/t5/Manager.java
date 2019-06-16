@@ -1,5 +1,6 @@
 package t5;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,38 +8,22 @@ import java.util.ArrayList;
 
 public class Manager {
 		
-		private static ArrayList<String> read_file(FileReader reader) throws IOException
+		private static ArrayList<String> read_file(File file ) throws IOException
 		{
 			ArrayList<String> l =  new ArrayList<String>();
-			int auxc;
-			String auxs = "";
-			while(true)
-			{
-					auxc = reader.read();
-					if(auxc == -1) break; // EOF
-					if(auxc!='\n')
-						auxs = auxs + (char)auxc;
-					else {
-						l.add(auxs);
-						auxs = "";
-					}
-
-			}
-			System.out.println(l);
+			BufferedReader bufferRead = new BufferedReader(new FileReader(file));
+	        String line = null;
+	        while((line = bufferRead.readLine()) != null){
+	            l.add(line);
+	        }
+	        bufferRead.close();
 			return l;
 		}
 		public static ArrayList<String> FiletoList(File file) throws IOException {
-			    file.createNewFile();
-			    FileReader reader = new FileReader(file);
-			    ArrayList<String> list = read_file(reader);
-			    reader.close();
+			    ArrayList<String> list = read_file(file);
 				return list;
 		}
-		public static ArrayList<String> FiletoList(FileReader filereader) throws IOException {
-				ArrayList<String> list = new ArrayList<String>();
-				read_file(filereader);
-				return list;
-		}
+
 		public static String ListtoString(ArrayList<String> list) {
 			StringBuffer str = new StringBuffer();
 			
@@ -51,15 +36,9 @@ public class Manager {
 		}
 		public static ArrayList<String> StringtoList(String s) {
 			ArrayList<String> list = new ArrayList<String>();
-			char[] c = s.toCharArray();
-			StringBuffer aux  = new StringBuffer();
-			for(int i = 0;i < s.length();i++) {
-				aux.append(c[i]);
-				if(c[i]=='\n') {
-					list.add(aux.toString());
-					System.out.print("Aux:"+aux);
-					aux.delete(0,i-1);
-				}
+			String[] strarray = s.split("\n");
+			for(String element:strarray) {
+				list.add(element + System.getProperty("line.separator"));
 			}
 			return list;
 		}

@@ -9,10 +9,10 @@ public class ListShuffler {
 	private static boolean online_success = false;
 	public static ArrayList<String> offlineshuffle(ArrayList<String> l) {
 		Collections.shuffle(l);
-		System.out.println(l);
 		return l;
 	}
 	public static ArrayList<String> onlineshuffle(ArrayList<String>l) {
+		StringBuffer response = new StringBuffer();
 		try {
         	  
 		      String urlstr = "https://www.random.org/lists/?mode=advanced";
@@ -25,7 +25,7 @@ public class ListShuffler {
 		      String data = "list=";
 		      for(String element: l) {
 					data = data + element + "%0D%0A";
-				}
+		      }
 		      data += "&format=plain&rnd=new";
 		      
 		      // Envia dados pela conexão aberta
@@ -36,22 +36,22 @@ public class ListShuffler {
 		      BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
 
-		      // Lê  e mostra a resposta, linha por linha, esperando input
+		      // Lê  a resposta, linha por linha
 		      String responseLine;
-		      StringBuffer response = new StringBuffer();
 		      while ((responseLine = in.readLine()) != null) {
-		    	  	response.append(responseLine + "\n");
-		        	System.out.print(responseLine);
+		    	  	response.append(responseLine + System.getProperty("line.separator"));
+		        	//System.out.print(responseLine);
 		        	online_success = true;
 		      }
 		      // Mostra resposta
-		      System.out.println(response); 
+		     // System.out.println(response); 
 
 		      in.close();
 		    } catch (IOException e) {e.printStackTrace();}
 		if(online_success == false)
 			return offlineshuffle(l);
-		return l;
+		else
+			 return Manager.StringtoList(response.toString());
 	}
 		
 }
