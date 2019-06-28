@@ -69,20 +69,20 @@ public class TableData {
 	public SimpleStringProperty anoProperty(){return ano;}
 	public SimpleStringProperty provaProperty(){return prova;}
 	public SimpleStringProperty tipoquestaoProperty(){return tipoquestao;}
-	public SimpleStringProperty idquestaoProperty() {return idquestao;}
+	public SimpleStringProperty idquestaoProperty(){return idquestao;}
 	public SimpleStringProperty objetoProperty(){return objeto;}
 	public SimpleStringProperty objetodetalhadoProperty(){return objetodetalhado;}
 	public SimpleStringProperty gabaritoProperty(){return gabarito;}
-	public SimpleStringProperty acertoscursoProperty() {return acertoscurso;}
+	public SimpleStringProperty acertoscursoProperty(){return acertoscurso;}
 	public SimpleStringProperty acertosregiaoProperty(){return acertosregiao;}
 	public SimpleStringProperty acertosbrasilProperty(){return acertosbrasil;}
 	public SimpleStringProperty acertosdifProperty(){return acertosdif;}
-	public SimpleStringProperty textoProperty() {return texto;}
+	public SimpleStringProperty textoProperty(){return texto;}
 	public SimpleStringProperty imagemProperty(){return imagem;}
 	public SimpleStringProperty urlprovaProperty(){return urlprova;}
 	public SimpleStringProperty urlinteseProperty(){return urlintese;}
-	public SimpleStringProperty urlcursoProperty() {return urlcurso;}
-	public SimpleStringProperty urlcropProperty() {return urlcrop;}
+	public SimpleStringProperty urlcursoProperty(){return urlcurso;}
+	public SimpleStringProperty urlcropProperty(){return urlcrop;}
 	
     public String getCurso() {return curso.get();}
     public String getAno() {return ano.get();}
