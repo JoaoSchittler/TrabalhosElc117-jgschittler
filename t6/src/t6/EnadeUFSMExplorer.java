@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,6 +16,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,7 +25,6 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 	private Stage primarystage;
 	
 	AppController control = new AppController(this);
-	VBox vb = new VBox();
 	
 	private MenuBar menus = new MenuBar();
 	
@@ -33,8 +36,9 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 			
 	private final Menu menuHelp = new Menu("Help");
 		private MenuItem itemAbout = new MenuItem("About");
-	private TableView table = new TableView();
-	private ArrayList<TableColumn<String,String>> columns;
+	private TableView<TableData> table = new TableView<TableData>();
+	private ObservableList<TableData> dadostabela = FXCollections.observableArrayList();
+
 	public void start(Stage stage){
 		this.primarystage = stage;
 		setItemActions();
@@ -53,7 +57,13 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		menus.getMenus().addAll(menuFile,menuHelp);
 	}
 	private void setTable() {
-		
+		// Abrir o arquivo e pegar os valores usando csvreader
+		control.fillTable(urlstr,"enade.csv");
+		// Colocar colunas na tabela
+		TableColumn<TableData,String> coluna1 = new TableColumn<TableData, String>();
+		coluna1.setCellValueFactory(new PropertyValueFactory<TableData,String>("curso"));
+		//Coloca dados na tabela
+		table.setItems(dadostabela);
 	}
 	private void setStage(){
 		this.primarystage.setScene(makeScene());
@@ -61,6 +71,7 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 	    this.primarystage.show();
 	}
 	private Scene makeScene() {
+		VBox vb = new VBox();
 		vb.setSpacing(10);
 		vb.setAlignment(Pos.CENTER);
 		vb.getChildren().addAll(menus,table);
@@ -76,13 +87,14 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		 Label secondLabel = new Label("I'm a Label on new Window");
 		 
          VBox vb2 = new VBox();
+         //Colocar dados da linha da tabela escolhida
          vb2.getChildren().add(secondLabel);
 
          Scene secondScene = new Scene(vb2, 230, 100);
 
          // New window (Stage)
          Stage newWindow = new Stage();
-         newWindow.setTitle("Second Stage");
+         newWindow.setTitle("Visualização detalhada");
          newWindow.setScene(secondScene);
 
          // Specifies the modality for new window.
@@ -96,6 +108,16 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
          newWindow.setY(primarystage.getY() + 100);
 
          newWindow.show();
+		
+	}
+	@Override
+	public void setTableList(ArrayList<String[]> data) {
+		ObservableList<String> columndata;
+		for(int i =0; i < data.size();i++) {
+			columndata = FXCollections.observableArrayList(data.get(i));
+			dadostabela.add(new TableData(columndata));
+		}
+		
 		
 	}
 	
