@@ -1,15 +1,10 @@
 package t6;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+import org.apache.commons.io.FileUtils;
 
 import com.opencsv.CSVReader;
 
@@ -31,7 +26,6 @@ public class AppController {
 			data = (ArrayList<String[]>) csvReader.readAll();
 			reader.close();
 			csvReader.close();
-			 
 		} catch (IOException e) {
 			
 			System.out.println("Error while reading table data file");
@@ -40,31 +34,19 @@ public class AppController {
 		view.setTableList(data);
 	}
 	private BufferedReader getReaderFromUrl(String urlSpec) throws IOException {
-		  try{
-			  //Faz o download do arquivo
-			  BufferedInputStream in = new BufferedInputStream(new URL(urlSpec).openStream());
-			  //Cria o arquivo enade.csv
-			  FileOutputStream fileOutputStream = new FileOutputStream("./enade.csv");
-			  byte dataBuffer[] = new byte[1024];
-			  int bytesRead;
-			  //Coloca os dados lidos do site no arquivo usando um buffer
-			  while ((bytesRead = in .read(dataBuffer, 0, 1024)) != -1) {
-				  fileOutputStream.write(dataBuffer, 0, bytesRead);
-				  
-			  fileOutputStream.close();	  
-		   }
-		  } catch (IOException e) {
-		   System.out.println("Erro while downloading file");
-		   view.endApplication();
-		  }
+
+		  URL url = new URL(urlSpec);
+	      File file = new File("enade.csv");
+	      //Realiza o download da url e guarda os resultados em enade.csv
+		  FileUtils.copyURLToFile(url, file);
 		  //Abre o arquivo enade.csv e cria um BufferedReader dele
-		  FileReader arq_reader = new FileReader("./enade.csv");
+		  FileReader arq_reader = new FileReader(file);
 		  BufferedReader reader = new BufferedReader(arq_reader);
 		  return reader;
-		 }
+		  
+	}
 	public void displayDetailedLine(int selectedIndex) {
 		view.makeDetailedTableWindow(selectedIndex);
-		
 	}
 	public void showAbout() {
 		view.makeAboutWindow();

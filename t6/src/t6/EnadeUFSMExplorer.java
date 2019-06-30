@@ -1,7 +1,6 @@
 package t6;
 
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -51,7 +51,10 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 	}
 	private void setItemActions() {
 		itemReload.setOnAction(e ->control.fillTable(urlstr));
-		itemSource.setOnAction(e -> System.out.println(urlstr));
+		itemSource.setOnAction(e -> {
+			System.out.println(urlstr);
+			this.makeSourceChangerWindow();
+		});
 		itemExit.setOnAction(e -> Platform.exit());
 		itemAbout.setOnAction(e -> control.showAbout());
 	}
@@ -130,33 +133,32 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		 else {
 			 return;
 		 }
-		 //Tabela da segunda Janela
+		 String urlcrop = dadostabela.get(selectedIndex).getUrlcrop();
+		 //Tabela detalhada
 		 TableView<TableData> detailedTable = new TableView<>();
-		 
 		 this.setBaseTableColumns(detailedTable);
 		 TableColumn<TableData,String> H = new TableColumn<>();
-		 TableColumn<TableData,String> R = new TableColumn<>();
-		 
-		 detailedTable.getColumns().addAll(H,R);
-		 
 		 H.setCellValueFactory(new PropertyValueFactory<TableData,String>("gabarito"));
-		 R.setCellValueFactory(new PropertyValueFactory<TableData,String>("urlcrop"));
+		 detailedTable.getColumns().add(H);
 		 detailedTable.setItems(FXCollections.observableArrayList(selectedIndexData));
 		 
-		 
-         VBox vb = new VBox();
-         //Colocar dados da linha da tabela escolhida
-         vb.getChildren().add(detailedTable);
+		 VBox vb = new VBox();
+		 vb.getChildren().add(detailedTable);
+		 if(urlcrop.length()>1) {
+			 ImageView imagem = new ImageView(urlcrop);
+			 Button displayImageButton = new Button("Display Image");
+			 displayImageButton.setOnAction(e -> vb.getChildren().add(imagem));
+			 vb.getChildren().add(displayImageButton);
+		 }
 
-         Scene detailedScene = new Scene(vb, 230, 100);
-
+		 Scene detailedScene = new Scene(vb,800,600);
          Stage newWindow = new Stage();
          newWindow.setTitle("Visualização Detalhada de Questão");
          newWindow.setScene(detailedScene);
          newWindow.initModality(Modality.WINDOW_MODAL);
          newWindow.initOwner(primarystage);
-         newWindow.setX(primarystage.getX() + 200);
-         newWindow.setY(primarystage.getY() + 100);
+         newWindow.setX(primarystage.getX());
+         newWindow.setY(primarystage.getY());
          newWindow.show();
 		
 	}
@@ -166,15 +168,15 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		Label aboutLabel = new Label("EnadeUFSMExplorer, feito por João Gabriel da Cunha Schittler");
 		vb.getChildren().add(aboutLabel);
 		
-		Scene aboutScene = new Scene(vb,100,100);
+		Scene aboutScene = new Scene(vb,400,100);
 		
 		Stage newWindow = new Stage();
         newWindow.setTitle("About");
         newWindow.setScene(aboutScene);
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.initOwner(primarystage);
-        newWindow.setX(primarystage.getX() + 200);
-        newWindow.setY(primarystage.getY() + 100);
+        newWindow.setX(primarystage.getX());
+        newWindow.setY(primarystage.getY());
         newWindow.show();
 	}
 	@Override
@@ -187,12 +189,13 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		confirmButton.setOnAction(new EventHandler<ActionEvent>() {
 	        public void handle(ActionEvent event) {
 	            urlstr = txtfld.getText();
-	            control.fillTable(urlstr);
 	            newWindow.close();
 	         }
 	      });
 
+		vb.getChildren().addAll(txtfld, confirmButton);
 		Scene sourceScene = new Scene(vb,300,100);
+
         newWindow.setTitle("Change Source");
         newWindow.setScene(sourceScene);
         newWindow.initModality(Modality.WINDOW_MODAL);

@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="/home/joaoschittler/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
 	<classpathentry kind="lib" path="/home/joaoschittler/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
 	<classpathentry kind="lib" path="/home/joaoschittler/opencsv-4.6.jar"/>
+	<classpathentry kind="lib" path="/home/joaoschittler/javafx-sdk-11.0.2/lib/org.apache.commons.io.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
