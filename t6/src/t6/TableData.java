@@ -1,5 +1,4 @@
 package t6;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
@@ -23,28 +22,7 @@ public class TableData {
     private SimpleStringProperty  urlintese = new SimpleStringProperty("-");
     private SimpleStringProperty  urlcurso = new SimpleStringProperty("-");
     private SimpleStringProperty  urlcrop = new SimpleStringProperty("-");
-    
-	/*public TableData(String curso,String ano,String prova,String tipoquestao,String idquestao,String objeto,String objetodetalhado,String gabarito,String acertoscurso,String acertosregiao,String acertosbrasil,String acertosdif,String texto,String imagem,String urlprova,String urlintese,String urlcurso,String urlcrop){
-		this.curso = new SimpleStringProperty(curso);
-		this.ano = new SimpleStringProperty(ano);
-		this.prova = new SimpleStringProperty(prova);
-		this.tipoquestao = new SimpleStringProperty(tipoquestao);
-		this.idquestao = new SimpleStringProperty(idquestao);
-		this.objeto = new SimpleStringProperty(objeto);
-		this.objetodetalhado = new SimpleStringProperty(objetodetalhado);
-		this.gabarito = new SimpleStringProperty(gabarito);
-		this.acertoscurso = new SimpleStringProperty(acertoscurso);
-		this.acertosregiao = new SimpleStringProperty(acertosregiao);
-		this.acertosbrasil = new SimpleStringProperty(acertosbrasil);
-		this.acertosdif = new SimpleStringProperty(acertosdif);
-		this.texto = new SimpleStringProperty(texto);
-		this.imagem = new SimpleStringProperty(imagem);
-		this.urlprova = new SimpleStringProperty(urlprova);
-		this.urlintese = new SimpleStringProperty(urlintese);
-		this.urlcurso = new SimpleStringProperty(urlcurso);
-		this.urlcrop = new SimpleStringProperty(urlcrop);
-	
-	}*/
+ 
 	public TableData(ObservableList<String> data) {
 		try {
 			this.setCurso(data.get(0));
@@ -59,10 +37,10 @@ public class TableData {
 			this.setAcertosregiao(data.get(9));
 			this.setAcertosbrasil(data.get(10));
 			this.setAcertosdif(data.get(11));
-			this.setUrlprova(data.get(12));
-			this.setUrlintese(data.get(13));
-			this.setUrlcurso(data.get(14));
-			this.setUrlcrop(data.get(15));
+			this.setUrlprova(data.get(14));
+			this.setUrlintese(data.get(15));
+			this.setUrlcurso(data.get(16));
+			this.setUrlcrop(data.get(17));
 		}catch(IndexOutOfBoundsException e) {}
 	}
 	public SimpleStringProperty cursoProperty(){return curso;}

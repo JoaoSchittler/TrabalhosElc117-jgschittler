@@ -1,5 +1,4 @@
 package t6;
-
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -64,15 +63,15 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		menus.getMenus().addAll(menuFile,menuHelp);
 	}
 	private void setBaseTableColumns(TableView<TableData> table) {
-		TableColumn<TableData,String> B = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> C = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> D = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> E = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> F = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> I = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> J = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> K = new TableColumn<TableData, String>();
-		TableColumn<TableData,String> L = new TableColumn<TableData, String>();
+		TableColumn<TableData,String> B = new TableColumn<TableData, String>("ANO");
+		TableColumn<TableData,String> C = new TableColumn<TableData, String>("PROVA");
+		TableColumn<TableData,String> D = new TableColumn<TableData, String>("TIPO QUESTÃO");
+		TableColumn<TableData,String> E = new TableColumn<TableData, String>("ID QUESTÃO");
+		TableColumn<TableData,String> F = new TableColumn<TableData, String>("OBJETO");
+		TableColumn<TableData,String> I = new TableColumn<TableData, String>("ACERTOS CURSO");
+		TableColumn<TableData,String> J = new TableColumn<TableData, String>("ACERTOS REGIAO");
+		TableColumn<TableData,String> K = new TableColumn<TableData, String>("ACERTOS BRASIL");
+		TableColumn<TableData,String> L = new TableColumn<TableData, String>("ACERTOS DIF");
 		
 		table.getColumns().addAll(B,C,D,E,F,I,J,K,L);
 		
@@ -133,7 +132,8 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		 else {
 			 return;
 		 }
-		 String urlcrop = dadostabela.get(selectedIndex).getUrlcrop();
+		 String imgUrl = selectedIndexData.getUrlcrop();
+
 		 //Tabela detalhada
 		 TableView<TableData> detailedTable = new TableView<>();
 		 this.setBaseTableColumns(detailedTable);
@@ -144,10 +144,14 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 		 
 		 VBox vb = new VBox();
 		 vb.getChildren().add(detailedTable);
-		 if(urlcrop.length()>1) {
-			 ImageView imagem = new ImageView(urlcrop);
+
+		 if(imgUrl.length()>2) {
+			 ImageView imagem = new ImageView(imgUrl);
 			 Button displayImageButton = new Button("Display Image");
-			 displayImageButton.setOnAction(e -> vb.getChildren().add(imagem));
+			 displayImageButton.setOnAction(e -> {
+			 	vb.getChildren().add(imagem);
+			 	displayImageButton.setDisable(true);
+			 });
 			 vb.getChildren().add(displayImageButton);
 		 }
 
@@ -208,7 +212,8 @@ public class EnadeUFSMExplorer extends Application implements ViewFunctions{
 	@Override
 	public void setTableList(ArrayList<String[]> data) {
 		ObservableList<String> columndata;
-		for(int i =0; i < data.size();i++) {
+
+		for(int i =1; i < data.size();i++) {
 			columndata = FXCollections.observableArrayList(data.get(i));
 			dadostabela.add(new TableData(columndata));
 		}
