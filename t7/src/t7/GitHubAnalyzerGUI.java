@@ -1,14 +1,15 @@
 package t7;
+
 import java.io.File;
 import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -20,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class GitHubAnalyzerGUI extends Application implements View{
+public class GitHubAnalyzerGUI extends Application implements AppView {
 	private Stage primarystage;
 	private MenuBar menus = new MenuBar();
 	private RequesterThread requester;
@@ -32,7 +33,8 @@ public class GitHubAnalyzerGUI extends Application implements View{
 		Application.launch(args);
 	}
 	@Override
-	public void start(Stage arg0){
+	public void start(Stage primarystage){
+		this.primarystage = primarystage;
 		setMenus();
 		setStage();
 	}
@@ -48,7 +50,8 @@ public class GitHubAnalyzerGUI extends Application implements View{
 		itemOpen.setOnAction(e -> control.enableFileChooser());
 		itemExit.setOnAction(e -> Platform.exit());
 		itemAbout.setOnAction(e -> System.out.println("GitHubAnalyzerGUI feito por 201810078"));
-		
+
+		itemCommitAnalyzer.setOnAction(e -> this.fillTable());
 		menufile.getItems().addAll(itemOpen,itemExit);
 		menutools.getItems().addAll(itemCommitAnalyzer);
 		menuhelp.getItems().addAll(itemAbout);
@@ -65,8 +68,22 @@ public class GitHubAnalyzerGUI extends Application implements View{
 		VBox vb = new VBox();
 		vb.setSpacing(10);
 		vb.setAlignment(Pos.CENTER);
+		HBox hb  = new HBox();
+		Label morecom = new Label();
+		morecom.setText("Rep with most commits\n "+control.getRepwithMostCommits(table.getItems()));
 		
-		return new Scene(vb, 400, 300);
+		Label leastcom = new Label();
+		leastcom.setText("Rep with least commits\n "+control.getRepwithLeastCommits(table.getItems()));
+		
+		Label newcom = new Label();
+		newcom.setText("Rep with newest commit\n "+control.getRepwithNewestCommit(table.getItems()));
+		
+		Label oldcom = new Label();
+		oldcom.setText("Rep with newest commit\n "+control.getRepwithOldestCommit(table.getItems()));
+		
+		hb.getChildren().addAll(morecom,leastcom,newcom,oldcom);
+		vb.getChildren().addAll(menus,table,hb);
+		return (new Scene(vb, 700, 500));
 	}
 	
 	@Override
@@ -77,16 +94,26 @@ public class GitHubAnalyzerGUI extends Application implements View{
 			filetorequestfrom = file;
 	}
 	@Override
-	public synchronized void fillTable(ArrayList<String> urlList) {
-		TableColumn<DataEntry,String> colunaurl = new TableColumn<>();
-		table.getColumns().add(colunaurl);
-		colunaurl.setCellValueFactory(new PropertyValueFactory<DataEntry,String>("numcommits"));	
+	public synchronized void fillTable() {
+		TableColumn<DataEntry,String> colunaNome = new TableColumn<>("Repositorio");
+		TableColumn<DataEntry,String> colunaNcommits = new TableColumn<>("NumCommits");
+		TableColumn<DataEntry,String> colunaTammed = new TableColumn<>("TamMedioMsg");
 		
-		ArrayList<DataEntry> dataList = new ArrayList<DataEntry>();
-		requester = new RequesterThread(dataList,filetorequestfrom);
+		table.getColumns().addAll(colunaNome,colunaNcommits,colunaTammed);
+		
+		colunaNome.setCellValueFactory(new PropertyValueFactory<DataEntry,String>("repname"));	
+		colunaNcommits.setCellValueFactory(new PropertyValueFactory<DataEntry,String>("numcommits"));	
+		colunaTammed.setCellValueFactory(new PropertyValueFactory<DataEntry,String>("tammedmsg"));	
+		
+		ThreadData data = new ThreadData(new ArrayList<DataEntry>());
+		
+		requester = new RequesterThread(data,filetorequestfrom);
+
+		System.out.println("Starting Requests");
+
 		requester.start();
-		try {this.wait();} catch (InterruptedException e) {}
-		table.setItems(FXCollections.observableArrayList(dataList));
+		data.startrequest();
+		table.setItems(FXCollections.observableArrayList(data.repdata));
 	}
 	
 }	

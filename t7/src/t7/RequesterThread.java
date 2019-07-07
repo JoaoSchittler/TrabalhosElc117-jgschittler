@@ -15,11 +15,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class RequesterThread extends Thread{
-	private ArrayList<DataEntry> repData;
-	public Boolean requestDone = false;
+	private ThreadData data;
 	private File file;
-	public RequesterThread(ArrayList<DataEntry> data,File file) {
-		this.repData = data;
+	public RequesterThread(ThreadData data,File file) {
+		this.data = data;
 		this.file = file;
 	}
 	public void run() {
@@ -30,22 +29,27 @@ public class RequesterThread extends Thread{
 		ArrayList<String> repos = new ArrayList<String>();
 		String aux;
 		try {
-			while( (aux = reader.readLine()) != null)
-				repos.add(aux);
+			while( (aux = reader.readLine()) != null){
+				System.out.println("Aux: "+ aux);
+				if(aux!=null){
+					System.out.println("Add to rep");
+					repos.add(aux);
+				}
+			}
 		} catch (IOException e) {}
-		
+
+
 		for(String rep : repos) {
-			repData.add(getRepData(rep));
+			System.out.println("Analyzing rep: "+rep);
+			data.repdata.add(getRepData(rep));
 		}
-		signal_request();
-	}
-	public synchronized void signal_request() {
-		this.notifyAll();	
+		data.endrequest();
 	}
 	private DataEntry getRepData(String rep) {
 		String urlbase = rep,firstcommitdata = "",lastcommitdata = "";	    
 	    Integer requestNumber = 1,totalcommits = 0;
 	    int endRequests = 0, totalmsglength = 0;
+	    String repname = getRepName(rep);
 	    while(endRequests == 0) {
 	    	String urltorequest = urlbase + requestNumber.toString();
 	    	try {
@@ -58,7 +62,7 @@ public class RequesterThread extends Thread{
 	    		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	    		JsonParser parser = new JsonParser();
 	    		JsonArray results = parser.parse(in.readLine()).getAsJsonArray();
-	    		System.out.println("Size: "+ results.size());
+	    		//System.out.println("Size: "+ results.size());
 	    		if(results.size() < 30) endRequests = 1;
 	    		totalcommits += results.size();
 	    		for (JsonElement e : results) {
@@ -76,7 +80,16 @@ public class RequesterThread extends Thread{
 	    }
 	    Float f = (float)totalmsglength/totalcommits;
 	    String mediatammsg = f.toString();
-		return new DataEntry(totalcommits.toString(),mediatammsg,firstcommitdata,lastcommitdata);
+		System.out.println("Finish request from " + urlbase);
+		return new DataEntry(repname,totalcommits.toString(),mediatammsg,firstcommitdata,lastcommitdata);
+	}
+	private String getRepName(String rep) {
+		String[] urlparts = rep.split("/");
+		System.out.println(urlparts);
+		try {
+			return urlparts[6];
+		}catch(IndexOutOfBoundsException e) {System.out.println("Error while getting rep name");}
+		return "ERROR NAME";
 	}
 	
 }

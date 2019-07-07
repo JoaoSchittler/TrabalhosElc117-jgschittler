@@ -1,20 +1,24 @@
 package t7;
 
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class DataEntry {
+	private SimpleStringProperty  repname;
     private SimpleStringProperty  numcommits;
     private SimpleStringProperty  tammedmsg;
 	private SimpleStringProperty  newestcommit;
 	private SimpleStringProperty  oldestcommit;
     
-    public DataEntry(String  numcommits,String tammedmsg, String firstcommitdata, String lastcommitdata) {
-   	 	this.numcommits = new SimpleStringProperty(numcommits);
+    public DataEntry(String repname,String  numcommits,String tammedmsg, String firstcommitdata, String lastcommitdata) {
+   	 	this.repname    = new SimpleStringProperty(repname);
+    	this.numcommits = new SimpleStringProperty(numcommits);
    	 	this.tammedmsg  = new SimpleStringProperty(tammedmsg);
    	 	this.newestcommit = new SimpleStringProperty(firstcommitdata);
    	 	this.oldestcommit = new SimpleStringProperty(lastcommitdata);
     }
     
+	public SimpleStringProperty getRepname() {return repname;	}
     public SimpleStringProperty numcommitsProperty() {return numcommits;}
     public SimpleStringProperty tammedmsgProperty() {return tammedmsg;}
     public SimpleStringProperty newestcommitProperty() {return newestcommit;}
@@ -29,6 +33,9 @@ public class DataEntry {
     public void setTammedmsg(String  tammedmsg) { this.tammedmsg.set(tammedmsg); }
     public void setNewestcommit(String  newestcommit) { this.numcommits.set(newestcommit); }
     public void setOldestcommit(String  oldestcommit) { this.tammedmsg.set(oldestcommit); }
+    public void setRepname(SimpleStringProperty repname) {this.repname = repname;}
+
+	
 
 
 }
