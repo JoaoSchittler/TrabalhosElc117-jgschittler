@@ -18,12 +18,13 @@ public class DataEntry {
    	 	this.oldestcommit = new SimpleStringProperty(lastcommitdata);
     }
     
-	public SimpleStringProperty getRepname() {return repname;	}
+	public SimpleStringProperty repnamProperty() {return repname;	}
     public SimpleStringProperty numcommitsProperty() {return numcommits;}
     public SimpleStringProperty tammedmsgProperty() {return tammedmsg;}
     public SimpleStringProperty newestcommitProperty() {return newestcommit;}
     public SimpleStringProperty oldestcommitProperty() {return oldestcommit;}
     
+	public String getRepname() {return repname.get();	}
     public String getNumcommits() { return numcommits.get(); }
     public String getTammedmsg() { return tammedmsg.get(); }
     public String getNewestcommit() { return newestcommit.get(); }
@@ -34,8 +35,6 @@ public class DataEntry {
     public void setNewestcommit(String  newestcommit) { this.numcommits.set(newestcommit); }
     public void setOldestcommit(String  oldestcommit) { this.tammedmsg.set(oldestcommit); }
     public void setRepname(SimpleStringProperty repname) {this.repname = repname;}
-
-	
 
 
 }

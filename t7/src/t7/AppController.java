@@ -28,7 +28,7 @@ public class AppController {
 				maiorrep = rep.getRepname().toString();
 			}
 		}
-		return maiorrep + "with "+ maiorn + "commits";
+		return maiorrep + " with "+ maiorn + "commits";
 	}
 	public String getRepwithLeastCommits(ObservableList<DataEntry> tabledata) {
 		int menorn = -1;
@@ -40,7 +40,7 @@ public class AppController {
 				menorep = rep.getRepname().toString();
 			}
 		}
-		return menorep + "with "+ menorn + "commits";
+		return menorep + " with "+ menorn + "commits";
 	}
 	public String getRepwithNewestCommit(ObservableList<DataEntry> tabledata) {
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:'Z'"); //Formato de data do commit do git

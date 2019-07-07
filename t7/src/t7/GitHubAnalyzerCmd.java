@@ -38,7 +38,7 @@ public class GitHubAnalyzerCmd {
 				maiorrep = rep.getRepname().toString();
 			}
 		}
-		return maiorrep + "with "+ maiorn + "commits";
+		return maiorrep + " with "+ maiorn + "commits";
 	}
 	public static String getRepwithLeastCommits(ArrayList<DataEntry> repdata) {
 		int menorn = -1;
@@ -50,7 +50,7 @@ public class GitHubAnalyzerCmd {
 				menorep = rep.getRepname().toString();
 			}
 		}
-		return menorep + "with "+ menorn + "commits";
+		return menorep + " with "+ menorn + "commits";
 	}
 	public static String getRepwithNewestCommit(ArrayList<DataEntry> repdata) {
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:'Z'"); //Formato de data do commit do git

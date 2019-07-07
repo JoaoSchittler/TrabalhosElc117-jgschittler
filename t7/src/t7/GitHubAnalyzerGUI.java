@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GitHubAnalyzerGUI extends Application implements AppView {
@@ -29,6 +30,7 @@ public class GitHubAnalyzerGUI extends Application implements AppView {
 	private File filetorequestfrom;
 	private final FileChooser fileChooser = new FileChooser();
 	private TableView<DataEntry> table = new TableView<>();
+	HBox hb  = new HBox();
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -49,8 +51,7 @@ public class GitHubAnalyzerGUI extends Application implements AppView {
 		
 		itemOpen.setOnAction(e -> control.enableFileChooser());
 		itemExit.setOnAction(e -> Platform.exit());
-		itemAbout.setOnAction(e -> System.out.println("GitHubAnalyzerGUI feito por 201810078"));
-
+		itemAbout.setOnAction(e -> this.makeAboutWindow());
 		itemCommitAnalyzer.setOnAction(e -> this.fillTable());
 		menufile.getItems().addAll(itemOpen,itemExit);
 		menutools.getItems().addAll(itemCommitAnalyzer);
@@ -68,20 +69,6 @@ public class GitHubAnalyzerGUI extends Application implements AppView {
 		VBox vb = new VBox();
 		vb.setSpacing(10);
 		vb.setAlignment(Pos.CENTER);
-		HBox hb  = new HBox();
-		Label morecom = new Label();
-		morecom.setText("Rep with most commits\n "+control.getRepwithMostCommits(table.getItems()));
-		
-		Label leastcom = new Label();
-		leastcom.setText("Rep with least commits\n "+control.getRepwithLeastCommits(table.getItems()));
-		
-		Label newcom = new Label();
-		newcom.setText("Rep with newest commit\n "+control.getRepwithNewestCommit(table.getItems()));
-		
-		Label oldcom = new Label();
-		oldcom.setText("Rep with newest commit\n "+control.getRepwithOldestCommit(table.getItems()));
-		
-		hb.getChildren().addAll(morecom,leastcom,newcom,oldcom);
 		vb.getChildren().addAll(menus,table,hb);
 		return (new Scene(vb, 700, 500));
 	}
@@ -114,6 +101,34 @@ public class GitHubAnalyzerGUI extends Application implements AppView {
 		requester.start();
 		data.startrequest();
 		table.setItems(FXCollections.observableArrayList(data.repdata));
+		//Atualiza Labels
+		Label morecom = new Label();
+		morecom.setText("Rep with most commits\n "+control.getRepwithMostCommits(table.getItems()));
+		Label leastcom = new Label();
+		leastcom.setText("Rep with least commits\n "+control.getRepwithLeastCommits(table.getItems()));
+		Label newcom = new Label();
+		newcom.setText("Rep with newest commit\n "+control.getRepwithNewestCommit(table.getItems()));	
+		Label oldcom = new Label();
+		oldcom.setText("Rep with newest commit\n "+control.getRepwithOldestCommit(table.getItems()));
+		hb.getChildren().addAll(morecom,leastcom,newcom,oldcom);
+		
+	}
+	@Override
+	public void makeAboutWindow() {
+		VBox vb = new VBox();
+		Label aboutLabel = new Label("GitHubAnalyzerGUI, feito por João Gabriel da Cunha Schittler");
+		vb.getChildren().add(aboutLabel);
+		
+		Scene aboutScene = new Scene(vb,400,100);
+		
+		Stage newWindow = new Stage();
+        newWindow.setTitle("About");
+        newWindow.setScene(aboutScene);
+        newWindow.initModality(Modality.WINDOW_MODAL);
+        newWindow.initOwner(primarystage);
+        newWindow.setX(primarystage.getX());
+        newWindow.setY(primarystage.getY());
+        newWindow.show();
 	}
 	
 }	

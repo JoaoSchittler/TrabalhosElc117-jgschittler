@@ -7,4 +7,6 @@ public interface AppView {
 
 	void fillTable();
 
+	void makeAboutWindow();
+
 }
